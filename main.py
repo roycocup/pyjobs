@@ -1,21 +1,48 @@
 import requests
 from bs4 import BeautifulSoup
+import os.path
+import hashlib
+import json
 
 url = "https://www.indeed.co.uk/jobs?q=python&l=London"
+page = 0
+increment = 10
+cache_folder = './cache/'
 
-response = requests.get(url)
+url = url + '&start=' + str(page)
 
-soup = BeautifulSoup(response.text, 'html.parser')
+# cache
+cache_filename = hashlib.md5(url.encode('utf-8')).hexdigest()
+file_exists = os.path.isfile(cache_filename) 
+if not file_exists:
+    response = requests.get(url)
+    with open(cache_folder + cache_filename, 'a') as cf:
+        cf.write(json.dumps(response.text))
 
-# results = soup.find_all('div', {"class": "result"})
+with open(cache_folder + cache_filename, 'r') as cf:
+    response = cf.read()
+
+
+response = json.loads(response)
+print(response)
+
+
+quit()
+soup = BeautifulSoup(response, 'html.parser')
+
 results = soup.select('div.result')
 
 
-# for result in results:
-#     result.children
-link = "https://www.indeed.co.uk/company/Baaltek/jobs/Python-Developer-7edaca00286cff06?fccid=c2be16111c46764a&vjs=3"
-links = results[0].find_all('a')
-print(links)
+
+# "https://www.indeed.co.uk/company/Baaltek/jobs/Python-Developer-7edaca00286cff06?fccid=c2be16111c46764a&vjs=3"
+
+
+for k, result in enumerate(results):
+    anchors = result.select('a[href^=/company]')
+    
+    print(anchors)
+    
+
 
 
 
