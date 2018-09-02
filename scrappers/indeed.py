@@ -8,14 +8,14 @@ from scrappers.scrapper import Scrapper
 
 class Indeed(Scrapper):
 
-    def compose_url(url, search_term, location, page, increment):
+    def compose_url(self, url, search_term, location, page, increment):
         search_term = "q=" + search_term
         location = "&l=" + location 
         page = '&start=' + str(page)
         return url + "?" + search_term + location + page
 
 
-    def get_from_cache(cache_filename, url):
+    def get_from_cache(self, cache_filename, url):
         cache_folder = './cache/'
         file_exists = os.path.isfile(cache_filename) 
         if not file_exists:
@@ -27,18 +27,15 @@ class Indeed(Scrapper):
             response = cf.read()
         
         return response    
-    
-    def hello():
-        print("hello")
 
-    def run():
+    def run(self):
         url = "https://www.indeed.co.uk/jobs"
         page = 0
         increment = 10
 
-        url = compose_url(url, "python", "london", page, increment)
+        url = self.compose_url(url, "python", "london", page, increment)
         cache_filename = hashlib.md5(url.encode('utf-8')).hexdigest()
-        response = get_from_cache(cache_filename, url)
+        response = self.get_from_cache(cache_filename, url)
 
         soup = BeautifulSoup(response, 'html.parser')
 
