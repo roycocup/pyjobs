@@ -4,12 +4,14 @@ import os.path
 import hashlib
 import json
 
-url = "https://www.indeed.co.uk/jobs?q=python&l=London"
+url = "https://www.indeed.co.uk/jobs"
+search_term = "q=python"
+location = "&l=London"
 page = 0
 increment = 10
 cache_folder = './cache/'
 
-url = url + '&start=' + str(page)
+url = url + search_term + location + '&start=' + str(page)
 
 # cache
 cache_filename = hashlib.md5(url.encode('utf-8')).hexdigest()
@@ -17,17 +19,11 @@ file_exists = os.path.isfile(cache_filename)
 if not file_exists:
     response = requests.get(url)
     with open(cache_folder + cache_filename, 'a') as cf:
-        cf.write(json.dumps(response.text))
+        cf.write(response.text)
 
 with open(cache_folder + cache_filename, 'r') as cf:
     response = cf.read()
 
-
-response = json.loads(response)
-print(response)
-
-
-quit()
 soup = BeautifulSoup(response, 'html.parser')
 
 results = soup.select('div.result')
@@ -38,8 +34,7 @@ results = soup.select('div.result')
 
 
 for k, result in enumerate(results):
-    anchors = result.select('a[href^=/company]')
-    
+    anchors = result.select('a[href]')
     print(anchors)
     
 
