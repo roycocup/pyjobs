@@ -27,6 +27,11 @@ class Indeed(Scrapper):
         results_filename = self.save_results(cache_filename)
         self.process_results(results, results_filename)
 
+        # iterate the file
+        # get body content from each
+        # regex for bullet points and enumerations
+        # save this to a db
+
 
 
 
