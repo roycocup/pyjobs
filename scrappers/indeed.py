@@ -25,14 +25,23 @@ class Indeed(Scrapper):
         results = soup.select('div.result')
 
         results_filename = self.save_results(cache_filename)
-
         self.process_results(results, results_filename)
 
+
+
+
+
     def process_results(self, results, results_filename):
-        uniq_anchors = list()
         for k, result in enumerate(results):
             anchors = result.select('a[href]')
-            self.process_anchors(anchors, results_filename, uniq_anchors)
+            uniq_anchors = list()
+            for anchor in anchors:
+                href = anchor.attrs['href']
+                if str(href).endswith('&vjs=3') and not any(href in s for s in uniq_anchors):
+                    # if result is not unique, then just continue
+                    uniq_anchors.append(href)
+                    with open(results_filename, 'a') as f:
+                        f.write(href + "\n")
 
     def save_results(self, cache_filename):
         results_filename = 'results/' + cache_filename
@@ -54,22 +63,11 @@ class Indeed(Scrapper):
             response = requests.get(url)
             with open(cache_folder + cache_filename, 'a') as cf:
                 cf.write(response.text)
-
         with open(cache_folder + cache_filename, 'r') as cf:
             response = cf.read()
         
-        return response    
+        return response
 
-    def process_anchors(self, anchors, results_filename, uniq_anchors):
-        for anchor in anchors:
-            href = anchor.attrs['href']
-            if str(href).endswith('&vjs=3'):
-                # if result is not unique, then just continue
-                if any(href in s for s in uniq_anchors):
-                    continue
-                uniq_anchors.append(href)
-                with open(results_filename, 'a') as f:
-                    f.write(href + "\n")
 
 
 
