@@ -1,3 +1,4 @@
 cache/*
 results/*
 scrappers/__pycache__/*
+./idea/*
