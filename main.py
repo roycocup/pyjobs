@@ -1,6 +1,6 @@
 # from multiprocessing import Process
 from scrappers.indeed import Indeed
-from twitter.puller import Puller
+from ctwitter.puller import Puller
 import logging
 from dotenv import load_dotenv
 
@@ -20,7 +20,7 @@ log.info("Starting "+ __name__)
 s1 = Indeed(log)
 s1.run()
 
-p = Puller()
+p = Puller(log)
 p.run()
 
 
