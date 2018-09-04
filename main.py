@@ -1,4 +1,5 @@
 from scrappers.indeed import Indeed
+import logging
 # from multiprocessing import Process
 
 
@@ -6,6 +7,12 @@ from scrappers.indeed import Indeed
 # p = Process(target=run)
 # p.start()
 # p.join()
-s1 = Indeed()
+logging.basicConfig()
+log = logging.getLogger("Pyjobs")
+log.setLevel(logging.DEBUG)
+
+log.info("Starting "+ __name__)
+
+s1 = Indeed(log)
 s1.run()
     
