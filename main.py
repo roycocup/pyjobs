@@ -1,12 +1,8 @@
-# from multiprocessing import Process
 from scrappers.indeed import Indeed
 from ctwitter.puller import Puller
 import logging
 from dotenv import load_dotenv
 
-# p = Process(target=run)
-# p.start()
-# p.join()
 
 # start logging
 logging.basicConfig()
