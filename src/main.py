@@ -19,7 +19,7 @@ if __name__ == '__main__':
     # s1 = Indeed(log)
     # s1.run()
 
-    p = Consumer(log)
+    p = Consumer(log, "golang job london")
     p.run()
     
 
