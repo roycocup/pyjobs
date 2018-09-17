@@ -2,6 +2,7 @@ import os
 from twitter import *
 import json
 from datetime import date
+import datetime
 
 
 class Consumer(object):
@@ -21,10 +22,10 @@ class Consumer(object):
         self.consumer_secret = os.getenv('TWITTER_CONSUMER_SECRET')
 
     def get_from_cache(self, cache_filename):
-        cache_folder = './cache/'
+        cache_folder = './src/cache/'
         file_exists = os.path.isfile(cache_folder + cache_filename) 
         if not file_exists:
-            response = self.t.statuses.home_timeline(count=5)
+            response = self.t.statuses.home_timeline(count=20)
             with open(cache_folder + cache_filename, 'a') as cf:
                 cf.write(json.dumps(response))
         with open(cache_folder + cache_filename, 'r') as cf:
@@ -37,5 +38,9 @@ class Consumer(object):
 
         self.t = Twitter(auth = OAuth(self.token, self.token_secret, self.consumer_key, self.consumer_secret))
 
-        response = self.get_from_cache("home-20180906")
-        print(type(json.loads(response)))
+        response = self.get_from_cache("home-"+str(datetime.date.today()))
+        responses = json.loads(response)
+
+        for item in responses:
+            print(item["text"])
+        

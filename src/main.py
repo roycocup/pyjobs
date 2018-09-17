@@ -21,6 +21,7 @@ if __name__ == '__main__':
 
     p = Consumer(log)
     p.run()
+    
 
 
 
