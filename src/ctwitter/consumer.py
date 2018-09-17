@@ -20,18 +20,9 @@ class Consumer(object):
         self.consumer_key = os.getenv('TWITTER_CONSUMER_KEY')
         self.consumer_secret = os.getenv('TWITTER_CONSUMER_SECRET')
 
-    def run(self):
-        self.log.info("Running custom twitter")
-
-        self.t = Twitter(auth = OAuth(self.token, self.token_secret, self.consumer_key, self.consumer_secret))
-
-        response = self.get_from_cache("home-20180906")
-        print(type(json.loads(response)))
-
-
     def get_from_cache(self, cache_filename):
         cache_folder = './cache/'
-        file_exists = os.path.isfile(cache_filename) 
+        file_exists = os.path.isfile(cache_folder + cache_filename) 
         if not file_exists:
             response = self.t.statuses.home_timeline(count=5)
             with open(cache_folder + cache_filename, 'a') as cf:
@@ -40,3 +31,11 @@ class Consumer(object):
             response = cf.read()
         
         return response
+
+    def run(self):
+        self.log.info("Running custom twitter")
+
+        self.t = Twitter(auth = OAuth(self.token, self.token_secret, self.consumer_key, self.consumer_secret))
+
+        response = self.get_from_cache("home-20180906")
+        print(type(json.loads(response)))

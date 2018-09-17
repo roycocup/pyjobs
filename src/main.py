@@ -19,8 +19,8 @@ if __name__ == '__main__':
     # s1 = Indeed(log)
     # s1.run()
 
-    # p = Consumer(log)
-    # p.run()
+    p = Consumer(log)
+    p.run()
 
 
 
