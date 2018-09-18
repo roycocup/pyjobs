@@ -26,7 +26,7 @@ class Consumer(object):
         self.search_str = search_str
 
     def get_from_cache(self, cache_filename):
-        cache_folder = './src/cache/'
+        cache_folder = './cache/'
         file_exists = os.path.isfile(cache_folder + cache_filename) 
         if not file_exists:
             response = self.t.search.tweets(q=self.search_str, count=self.num_items)
@@ -43,7 +43,7 @@ class Consumer(object):
         self.t = Twitter(auth = OAuth(self.token, self.token_secret, self.consumer_key, self.consumer_secret))
 
         # replace everything that is not a word with single dash 
-        search_name = re.sub(r"[^\w\s]", '-', self.search_str)
+        search_name = re.sub(r"[^\w\d]", '-', self.search_str)
         cache_filename = search_name + "-" + str(datetime.date.today())
 
         response = self.get_from_cache(cache_filename)

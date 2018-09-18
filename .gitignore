@@ -3,3 +3,4 @@ src/results/*
 src/*/__pycache__/*
 .idea/*
 .env
+venv/*
