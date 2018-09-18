@@ -16,22 +16,28 @@ class Tiobe(Scrapper):
         
         cache_filename = hashlib.md5(url.encode('utf-8')).hexdigest()
         response = self.get_from_cache(cache_filename, url)
-
+        
         soup = BeautifulSoup(response, 'html.parser')
 
-        results = soup.select('div.result')
-
-        results_filename = self.save_results(cache_filename)
+        results = soup.select('table.table-striped')
+        
+        results_filename = self.cache_results(cache_filename)
         self.process_results(results, results_filename)
 
 
     def process_results(self, results, results_filename):
         for k, result in enumerate(results):
-            anchors = result.select('table')
+            rows = result.select('tr')
+            
+            # remove the header
+            header = rows.pop(0)
+            for row in rows:
+                info = row.find_all('td')
+            
             
 
-    def save_results(self, cache_filename):
-        results_filename = 'results/' + cache_filename
+    def cache_results(self, cache_filename):
+        results_filename = './cache/' + cache_filename
         with open(results_filename, 'w+') as f:
             f.close
         return results_filename
