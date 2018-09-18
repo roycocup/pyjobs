@@ -27,11 +27,15 @@ class Consumer(object):
 
     def get_from_cache(self, cache_filename):
         cache_folder = './cache/'
-        file_exists = os.path.isfile(cache_folder + cache_filename) 
+        file_exists = os.path.isfile(cache_folder + cache_filename)
+
+        # Write to file if its not cached already 
         if not file_exists:
             response = self.t.search.tweets(q=self.search_str, count=self.num_items)
             with open(cache_folder + cache_filename, 'a') as cf:
                 cf.write(json.dumps(response))
+        
+        # open the cache file 
         with open(cache_folder + cache_filename, 'r') as cf:
             response = cf.read()
         
