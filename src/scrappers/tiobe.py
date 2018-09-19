@@ -31,23 +31,41 @@ class Tiobe(Scrapper):
         for k, result in enumerate(results):
             rows = result.select('tr')
             
+            if (k > 1):
+                break
+
             # remove the header
             header = rows.pop(0)
+
+            print('table:', k)
             
-            for row in rows:
+            for j, row in enumerate(rows):
+                
+
                 info = row.find_all('td')
-                language = {
-                    'position': info[0].text,
-                    'name': info[3].text,
-                    'share': info[4].text,
-                    'monthly_movement': info[5].text,
-                }
+
+                # First part of the table is composed of more than 3 elements
+                # second part has only 3
+                # and then theres other tables we dont care about
+                if (len(info) > 3):
+                    language = {
+                        'position': info[0].text,
+                        'name': info[3].text,
+                        'share': info[4].text,
+                        'monthly_change': info[5].text,
+                    }
+                else:    
+                    language = {
+                        'position': info[0].text,
+                        'name': info[1].text,
+                        'share': info[2].text,
+                    }
                 
                 top_languages.append(language)
             
-        write_tiobe_to_file(top_languages)
+        self.persist(top_languages)
     
-    def write_tiobe_to_file(top_languages):
+    def persist(self, top_languages):
         pass
             
 

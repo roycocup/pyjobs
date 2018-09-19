@@ -32,10 +32,6 @@ class Indeed(Scrapper):
         # regex for bullet points and enumerations
         # save this to a db
 
-
-
-
-
     def process_results(self, results, results_filename):
         for k, result in enumerate(results):
             anchors = result.select('a[href]')
@@ -49,7 +45,7 @@ class Indeed(Scrapper):
                         f.write(href + "\n")
 
     def save_results(self, cache_filename):
-        results_filename = 'results/' + cache_filename
+        results_filename = './src/results/' + cache_filename
         with open(results_filename, 'w+') as f:
             f.close
         return results_filename

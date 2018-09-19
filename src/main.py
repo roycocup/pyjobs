@@ -17,15 +17,17 @@ if __name__ == '__main__':
     # load env
     load_dotenv()
 
-    # s1 = Indeed(log)
-    # s1.run()
+    # query indeed
+    s1 = Indeed(log)
+    s1.run()
 
+    # tiobe top langs query
     tiobe = Tiobe(log)
     tiobe.run()
 
-
-    # p = Consumer(log, "golang job london")
-    # p.run()
+    # twitter consumer
+    p = Consumer(log, "golang job london")
+    p.run()
     
 
 
