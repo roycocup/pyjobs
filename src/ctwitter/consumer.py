@@ -26,7 +26,7 @@ class Consumer(object):
         self.search_str = search_str
 
     def get_from_cache(self, cache_filename):
-        cache_folder = './cache/'
+        cache_folder = './src/cache/'
         file_exists = os.path.isfile(cache_folder + cache_filename)
 
         # Write to file if its not cached already 

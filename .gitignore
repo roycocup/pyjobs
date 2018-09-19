@@ -1,7 +1,6 @@
-cache/*
-results/*
+src/cache/*
 src/*/__pycache__/*
 .idea/*
 .env
 venv/*
-*.pyc
+src/*.pyc
