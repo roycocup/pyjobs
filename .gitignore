@@ -1,5 +1,7 @@
 src/cache/*
+!src/cache/.gitkeep
 src/results/*
+!src/results/.gitkeep
 src/*/__pycache__/*
 .idea/*
 .env
