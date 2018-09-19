@@ -36,8 +36,6 @@ class Tiobe(Scrapper):
 
             # remove the header
             header = rows.pop(0)
-
-            print('table:', k)
             
             for j, row in enumerate(rows):
                 
