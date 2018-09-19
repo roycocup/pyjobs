@@ -1,5 +1,5 @@
-src/cache/*
-src/results/*
+cache/*
+results/*
 src/*/__pycache__/*
 .idea/*
 .env
