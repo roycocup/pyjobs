@@ -3,8 +3,8 @@
 ## Roadmap
 
 - job boards
-    - indeed - scrape
-    - monster - scrape
+    - indeed 
+    - monster 
 
 - Social Networks 
     - Twitter
