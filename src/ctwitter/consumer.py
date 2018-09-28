@@ -25,22 +25,6 @@ class Consumer(object):
         self.consumer_secret = os.getenv('TWITTER_CONSUMER_SECRET')
         self.search_str = search_str
 
-    def get_from_cache(self, cache_filename):
-        cache_folder = './src/cache/'
-        file_exists = os.path.isfile(cache_folder + cache_filename)
-
-        # Write to file if its not cached already 
-        if not file_exists:
-            response = self.t.search.tweets(q=self.search_str, count=self.num_items)
-            with open(cache_folder + cache_filename, 'a') as cf:
-                cf.write(json.dumps(response))
-        
-        # open the cache file 
-        with open(cache_folder + cache_filename, 'r') as cf:
-            response = cf.read()
-        
-        return response
-
     def run(self):
         self.log.info("Running custom twitter")
 
@@ -56,3 +40,18 @@ class Consumer(object):
         for item in responses["statuses"]:
             print(item["text"])
         
+    def get_from_cache(self, cache_filename):
+        cache_folder = './src/cache/'
+        file_exists = os.path.isfile(cache_folder + cache_filename)
+
+        # Write to file if its not cached already 
+        if not file_exists:
+            response = self.t.search.tweets(q=self.search_str, count=self.num_items)
+            with open(cache_folder + cache_filename, 'a') as cf:
+                cf.write(json.dumps(response))
+        
+        # open the cache file 
+        with open(cache_folder + cache_filename, 'r') as cf:
+            response = cf.read()
+        
+        return response
