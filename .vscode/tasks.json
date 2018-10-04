@@ -6,7 +6,11 @@
         {
             "label": "Run Python",
             "type": "shell",
-            "command": "python3 src/main.py"
+            "command": "python3 src/main.py",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }

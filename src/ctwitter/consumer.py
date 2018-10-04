@@ -16,6 +16,7 @@ class Consumer(object):
     t = None
     search_str = ""
     num_items = 100
+    cache_folder = './src/cache/'
 
     def __init__(self, log, search_str):
         self.log = log
@@ -37,21 +38,22 @@ class Consumer(object):
         response = self.get_from_cache(cache_filename)
         responses = json.loads(response)
         
-        for item in responses["statuses"]:
-            print(item["text"])
+        with open(self.cache_folder + cache_filename + ".responses.txt", 'w') as f:
+            for item in responses["statuses"]:
+                f.write(item["text"])
+        
         
     def get_from_cache(self, cache_filename):
-        cache_folder = './src/cache/'
-        file_exists = os.path.isfile(cache_folder + cache_filename)
+        file_exists = os.path.isfile(self.cache_folder + cache_filename)
 
         # Write to file if its not cached already 
         if not file_exists:
             response = self.t.search.tweets(q=self.search_str, count=self.num_items)
-            with open(cache_folder + cache_filename, 'a') as cf:
+            with open(self.cache_folder + cache_filename, 'a') as cf:
                 cf.write(json.dumps(response))
         
         # open the cache file 
-        with open(cache_folder + cache_filename, 'r') as cf:
+        with open(self.cache_folder + cache_filename, 'r') as cf:
             response = cf.read()
         
         return response
