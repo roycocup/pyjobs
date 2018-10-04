@@ -4,17 +4,17 @@ from ctwitter.consumer import Consumer
 import logging
 from dotenv import load_dotenv
 
-def run():
+def run(keyword, location):
     # query indeed
     s1 = Indeed(log)
-    s1.run()
+    s1.run(keyword, location)
 
     # tiobe top langs query
     tiobe = Tiobe(log)
     tiobe.run()
 
     # twitter consumer
-    p = Consumer(log, "golang job")
+    p = Consumer(log, keyword + " job")
     p.run()
 
 
@@ -30,7 +30,11 @@ if __name__ == '__main__':
     # load env
     load_dotenv()
 
-    run()
+    positions = ["php", "golang", "java", "javascript", "ruby", "rails", "ror", 
+                "dotnet", "node", "angular", "python", "data", "machine learning"]
+
+    for position in positions:
+        run(position, "london")
     
 
 

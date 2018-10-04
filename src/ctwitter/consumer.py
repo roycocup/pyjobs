@@ -40,7 +40,8 @@ class Consumer(object):
         
         with open(self.cache_folder + cache_filename + ".responses.txt", 'w') as f:
             for item in responses["statuses"]:
-                f.write(item["text"])
+                if item["text"]:
+                    f.write(item["text"])
         
         
     def get_from_cache(self, cache_filename):

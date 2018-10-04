@@ -10,13 +10,13 @@ class Indeed(Scrapper):
         self.log = log
 
 
-    def run(self):
+    def run(self, jobtitle, location):
         self.log.info("Running " + __name__)
         url = "https://www.indeed.co.uk/jobs"
         page = 0
         increment = 10
 
-        url = self.compose_url(url, "python", "london", page, increment)
+        url = self.compose_url(url, jobtitle, location, page, increment)
         cache_filename = hashlib.md5(url.encode('utf-8')).hexdigest()
         response = self.get_from_cache(cache_filename, url)
 
