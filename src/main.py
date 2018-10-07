@@ -6,12 +6,12 @@ from dotenv import load_dotenv
 
 def run(keyword, location):
     # query indeed
-    s1 = Indeed(log)
-    s1.run(keyword, location)
+    # s1 = Indeed(log)
+    # s1.run(keyword, location)
 
     # tiobe top langs query
-    tiobe = Tiobe(log)
-    tiobe.run()
+    # tiobe = Tiobe(log)
+    # tiobe.run()
 
     # twitter consumer
     p = Consumer(log, keyword + " job")
@@ -31,9 +31,12 @@ if __name__ == '__main__':
     load_dotenv()
 
     positions = ["php", "golang", "java", "javascript", "ruby", "rails", "ror", 
-                "dotnet", "node", "angular", "python", "data", "machine learning"]
+                "dotnet", "node", "angular", "python", "data", "machine learning", 
+                "JSP", "AJAX", "jQuery", "JSON","HTML", "CSS", "php", "mysql", "graph", 
+                "mongo", "databases"]
 
     for position in positions:
+        log.info("querying for " + position)
         run(position, "london")
     
 

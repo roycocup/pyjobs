@@ -17,6 +17,7 @@ class Consumer(object):
     search_str = ""
     num_items = 100
     cache_folder = './src/cache/'
+    results_folder = './src/results/'
 
     def __init__(self, log, search_str):
         self.log = log
@@ -38,7 +39,7 @@ class Consumer(object):
         response = self.get_from_cache(cache_filename)
         responses = json.loads(response)
         
-        with open(self.cache_folder + cache_filename + ".responses.txt", 'w') as f:
+        with open(self.results_folder + cache_filename + ".responses.txt", 'w') as f:
             for item in responses["statuses"]:
                 if item["text"]:
                     f.write(item["text"])

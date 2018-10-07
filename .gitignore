@@ -6,4 +6,5 @@ src/*/__pycache__/*
 .idea/*
 .env
 venv/*
+env/*
 src/*.pyc
