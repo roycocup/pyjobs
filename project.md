@@ -18,6 +18,7 @@
     - [tiobe](https://www.tiobe.com/tiobe-index/)
         - persist to database by month
     - [redmonk chart](https://redmonk.com/sogrady/2018/03/07/language-rankings-1-18/)
+    - [Another spectrum analysis](https://spectrum.ieee.org/ns/IEEE_TPL_2018/index/2018/1/1/1/0/1/5/1/75/1/50/1/100/1/50/1/75/1/75/1/75/1/20/1/20/1/85/1/40/)
 
 
 - publications
