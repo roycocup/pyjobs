@@ -14,7 +14,7 @@ def run(keyword, location):
     # tiobe.run()
 
     # twitter consumer
-    p = Consumer(log, keyword + " job")
+    p = Consumer(log, keyword + " AND job OR position ")
     p.run()
 
 
@@ -30,10 +30,14 @@ if __name__ == '__main__':
     # load env
     load_dotenv()
 
-    positions = ["php", "golang", "java", "javascript", "ruby", "rails", "ror", 
+    positions = ["golang", "java", "javascript", "ruby", "rails", "ror", 
                 "dotnet", "node", "angular", "python", "data", "machine learning", 
                 "JSP", "AJAX", "jQuery", "JSON","HTML", "CSS", "php", "mysql", "graph", 
-                "mongo", "databases"]
+                "mongo", "databases", "elasticsearch", "linear regression", "nlp", "3d",
+                "mock", "tdd", "SOLID principles", "bdd", "ios", "android", "macos", "linux",
+                "git", "subversion", "as400", "laravel", "symfony", "oauth", "codeigniter", 
+                "yii", "ruby on rails"]
+    
 
     for position in positions:
         log.info("querying for " + position)
