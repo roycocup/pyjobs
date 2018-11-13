@@ -39,10 +39,18 @@ class Consumer(object):
         response = self.get_from_cache(cache_filename)
         responses = json.loads(response)
         
+        set_responses = set()
+        for tweet in responses['statuses']:
+            sanitised_str = tweet['full_text']
+            sanitised_str = sanitised_str.replace("\n", " | ")
+            # sanitised_str = sanitised_str.replace('\t', '')
+            # sanitised_str = sanitised_str.replace('\r', '')
+            set_responses.add(sanitised_str)
+
         with open(self.results_folder + cache_filename + ".responses.txt", 'w') as f:
-            for item in responses["statuses"]:
-                if item["text"]:
-                    f.write(item["text"])
+            for item in set_responses:
+                sanitized_str = str(item)
+                f.write(sanitized_str + "\n")
         
         
     def get_from_cache(self, cache_filename):
@@ -50,7 +58,7 @@ class Consumer(object):
 
         # Write to file if its not cached already 
         if not file_exists:
-            response = self.t.search.tweets(q=self.search_str, count=self.num_items)
+            response = self.t.search.tweets(q=self.search_str, count=self.num_items, tweet_mode='extended')
             with open(self.cache_folder + cache_filename, 'a') as cf:
                 cf.write(json.dumps(response))
         
