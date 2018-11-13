@@ -14,7 +14,7 @@ def run(keyword, location):
     # tiobe.run()
 
     # twitter consumer
-    p = Consumer(log, keyword + " AND job OR position ")
+    p = Consumer(log, keyword + " AND job OR position OR hiring ")
     p.run()
 
 
@@ -36,7 +36,8 @@ if __name__ == '__main__':
                 "mongo", "databases", "elasticsearch", "linear regression", "nlp", "3d",
                 "mock", "tdd", "SOLID principles", "bdd", "ios", "android", "macos", "linux",
                 "git", "subversion", "as400", "laravel", "symfony", "oauth", "codeigniter", 
-                "yii", "ruby on rails"]
+                "yii", "ruby on rails", "AI", "Data Science", "Deep Learning", "Big Data", 
+                "BigData"]
     
 
     for position in positions:
