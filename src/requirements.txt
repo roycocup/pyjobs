@@ -3,7 +3,7 @@ bs4==0.0.1
 certifi==2018.8.24
 chardet==3.0.4
 idna==2.7
-nltk==3.3
+nltk==3.8.1
 python-dotenv==0.9.1
 requests==2.19.1
 six==1.11.0
